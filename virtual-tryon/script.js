@@ -41,13 +41,15 @@ faceMesh.onResults((results) => {
   if (results.multiFaceLandmarks.length > 0) {
     const landmarks = results.multiFaceLandmarks[0];
 
+    const offsetY = 20;  // Move earrings up by 20 pixels
+
     const left = {
-      x: landmarks[234].x * canvasElement.width,
-      y: landmarks[234].y * canvasElement.height,
+      x: landmarks[132].x * canvasElement.width,
+      y: landmarks[132].y * canvasElement.height - offsetY,
     };
     const right = {
-      x: landmarks[454].x * canvasElement.width,
-      y: landmarks[454].y * canvasElement.height,
+      x: landmarks[361].x * canvasElement.width,
+      y: landmarks[361].y * canvasElement.height - offsetY,
     };
 
     leftEarPositions.push(left);
@@ -59,8 +61,8 @@ faceMesh.onResults((results) => {
     const rightSmooth = smooth(rightEarPositions);
 
     if (earringImg.complete) {
-      if (leftSmooth) canvasCtx.drawImage(earringImg, leftSmooth.x - 20, leftSmooth.y, 40, 70);
-      if (rightSmooth) canvasCtx.drawImage(earringImg, rightSmooth.x - 20, rightSmooth.y, 40, 70);
+      if (leftSmooth) canvasCtx.drawImage(earringImg, leftSmooth.x - 30, leftSmooth.y, 60, 70);
+      if (rightSmooth) canvasCtx.drawImage(earringImg, rightSmooth.x - 20, rightSmooth.y, 60, 70);
     }
   }
 });
