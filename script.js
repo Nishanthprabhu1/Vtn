@@ -3,7 +3,7 @@ const canvasElement = document.getElementById('overlay');
 const canvasCtx = canvasElement.getContext('2d');
 
 const earringImg = new Image();
-earringImg.src = 'earring.png'; // your earring image
+earringImg.src = 'earring.png'; // Your transparent earring image
 
 const faceMesh = new FaceMesh({
   locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`
@@ -22,13 +22,17 @@ faceMesh.onResults((results) => {
   if (results.multiFaceLandmarks.length > 0) {
     const landmarks = results.multiFaceLandmarks[0];
     
-    // Left ear: landmark 234
+    // LEFT EAR (Landmark 234)
     const leftEar = landmarks[234];
+    const lx = leftEar.x * canvasElement.width;
+    const ly = leftEar.y * canvasElement.height;
+    canvasCtx.drawImage(earringImg, lx - 15, ly, 30, 50); // Adjust position/size
 
-    const x = leftEar.x * canvasElement.width;
-    const y = leftEar.y * canvasElement.height;
-
-    canvasCtx.drawImage(earringImg, x - 15, y, 30, 50); // Adjust size/position
+    // RIGHT EAR (Landmark 454)
+    const rightEar = landmarks[454];
+    const rx = rightEar.x * canvasElement.width;
+    const ry = rightEar.y * canvasElement.height;
+    canvasCtx.drawImage(earringImg, rx - 15, ry, 30, 50); // Adjust position/size
   }
 });
 
@@ -40,4 +44,3 @@ const camera = new Camera(videoElement, {
   height: 300
 });
 camera.start();
-
