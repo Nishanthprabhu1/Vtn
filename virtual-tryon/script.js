@@ -3,10 +3,13 @@ const canvasElement = document.getElementById('overlay');
 const canvasCtx = canvasElement.getContext('2d');
 
 const earringImg = new Image();
-earringImg.src = 'earring1.png'; // default earring
+earringImg.src = 'earrings/earring1.png'; // default
 
 function changeEarring(filename) {
-  earringImg.src = filename;
+  earringImg.src = `earrings/${filename}`;
+  console.log("Switching to:", filename);
+  earringImg.onload = () => console.log("Image loaded:", filename);
+  earringImg.onerror = () => console.log("Failed to load:", filename);
 }
 
 const faceMesh = new FaceMesh({
@@ -20,7 +23,17 @@ faceMesh.setOptions({
   minTrackingConfidence: 0.5
 });
 
-// (Include the smoothing code here from before)
+let leftEarPositions = [];
+let rightEarPositions = [];
+
+function smooth(positions) {
+  if (positions.length === 0) return null;
+  const sum = positions.reduce((acc, pos) => ({ x: acc.x + pos.x, y: acc.y + pos.y }), { x: 0, y: 0 });
+  return {
+    x: sum.x / positions.length,
+    y: sum.y / positions.length
+  };
+}
 
 faceMesh.onResults((results) => {
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -28,14 +41,30 @@ faceMesh.onResults((results) => {
   if (results.multiFaceLandmarks.length > 0) {
     const landmarks = results.multiFaceLandmarks[0];
 
-    // Your smoothing code here...
+    const left = {
+      x: landmarks[234].x * canvasElement.width,
+      y: landmarks[234].y * canvasElement.height,
+    };
+    const right = {
+      x: landmarks[454].x * canvasElement.width,
+      y: landmarks[454].y * canvasElement.height,
+    };
 
-    // Then draw earrings using earringImg as before
-    // ...
+    leftEarPositions.push(left);
+    rightEarPositions.push(right);
+    if (leftEarPositions.length > 5) leftEarPositions.shift();
+    if (rightEarPositions.length > 5) rightEarPositions.shift();
+
+    const leftSmooth = smooth(leftEarPositions);
+    const rightSmooth = smooth(rightEarPositions);
+
+    if (earringImg.complete) {
+      if (leftSmooth) canvasCtx.drawImage(earringImg, leftSmooth.x - 20, leftSmooth.y, 40, 70);
+      if (rightSmooth) canvasCtx.drawImage(earringImg, rightSmooth.x - 20, rightSmooth.y, 40, 70);
+    }
   }
 });
 
-// Start camera as before
 const camera = new Camera(videoElement, {
   onFrame: async () => {
     await faceMesh.send({ image: videoElement });
@@ -44,3 +73,8 @@ const camera = new Camera(videoElement, {
   height: 720,
 });
 camera.start();
+
+videoElement.addEventListener('loadedmetadata', () => {
+  canvasElement.width = videoElement.videoWidth;
+  canvasElement.height = videoElement.videoHeight;
+});
