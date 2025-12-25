@@ -4,8 +4,8 @@
 const API_KEY = "AIzaSyAXG3iG2oQjUA_BpnO8dK8y-MHJ7HLrhyE"; 
 
 // YOUR DEPLOYED GOOGLE APPS SCRIPT URL (Lead Gen)
-// UPDATED WITH NEW DEPLOYMENT ID
-const UPLOAD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0myD4xF_9nVvuyFTphfOxFQTW-Y7VM58I4bb_aPgkJvLIyybYYYICoHHpj8Bx3jIP/exec";
+// UPDATED WITH NEW DEPLOYMENT ID (26 Dec 2025)
+const UPLOAD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwO8CLKwweEag90f2NL3YF1rnVNMxBjMLT07d9l1efgtKRcz1G5XH9VEKcPeAM18I0K/exec";
 
 const DRIVE_FOLDERS = {
   diamond_earrings: "1RSIyBfLhw5eVzkC8pia-eG4Y196WkkLa",
