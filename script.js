@@ -1,16 +1,16 @@
 /* script.js - Jewels-Ai Atelier: Drive Integration + WhatsApp Lead Gen + Actual Filenames */
 
 /* --- CONFIGURATION --- */
-const API_KEY = "AIzaSyAXG3iG2oQjUA_BpnO8dK8y-MHJ7HLrhyE"; 
+const API_KEY = "AIzaSyBhi05HMVGg90dPP91zG1RZtNxm-d6hnQw"; 
 
-// YOUR DEPLOYED GOOGLE APPS SCRIPT URL (Lead Gen)
-const UPLOAD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPHfmUs74hhB4zL1y77xTrKccvE3-PZ-yBzTQe2w8GXSsah5Sz_PyLvCYhLnVpVDyw3w/exec";
+// YOUR DEPLOYED GOOGLE APPS SCRIPT URL (Lead Gen) -> UPDATED
+const UPLOAD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0myD4xF_9nVvuyFTphfOxFQTW-Y7VM58I4bb_aPgkJvLIyybYYYICoHHpj8Bx3jIP/exec";
 
 const DRIVE_FOLDERS = {
-  diamond_earrings: "1RSIyBfLhw5eVzkC8pia-eG4Y196WkkLa",
-  diamond_necklaces: "1YA6lusQg-ZbRi3zJXVhCAKTSG73uGswm",
-  gold_earrings: "14JSVZ6UKzjZbv2B8CFU2cF4pXk2f6QWC",
-  gold_necklaces: "14AwBXvEq5yTf_OsPrIv5vsNd_nnSBIdx"
+  diamond_earrings: "1N0jndAEIThUuuNAJpvuRMGsisIaXCgMZ",
+  diamond_necklaces: "1JGV8T03YdzjfW0Dyt9aMPybH8V9-gEhw",
+  gold_earrings: "1GMZpcv4A1Gy2xiaIC1XPG_IOAt9NrDpi",
+  gold_necklaces: "1QIvX-PrSVrK9gz-TEksqiKlXPGv2hsS5"
 };
 
 /* Asset Cache */
